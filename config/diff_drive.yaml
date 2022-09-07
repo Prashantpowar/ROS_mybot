@@ -1,0 +1,31 @@
+# Publish all joint states -----------------------------------
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50  
+
+# Differential Drive Controller
+diff_drive_controller:
+  type: diff_drive_controller/DiffDriveController
+  left_wheel: ['leftwheel_joint']
+  right_wheel: ['rightwheel_joint']
+
+
+pid_gains:
+  leftwheel_joint:
+    p: 100.0
+    i: 1.0
+    d: 0.1
+  rightwheel_joint:
+    p: 100.0
+    i: 1.0
+    d: 0.1
+
+
+  wheel_separation: 0.5
+  wheel_radius: 0.1
+
+  cmd_vel_timeout: 0.25
+  enable_odom_tf: true
+
+  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
