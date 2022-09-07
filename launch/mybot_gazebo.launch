@@ -1,0 +1,24 @@
+<launch>
+    <param command="$(find xacro)/xacro $(find mybot)/urdf/mybot.xacro" name="robot_description"/>
+    <node args="-param robot_description -urdf -model mybot" name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"/>
+    <!-- <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="gui" value="true"/>
+      <arg name="headless" value="false"/>
+      <arg name="debug" value="false"/>
+    </include> -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="$(find mybot)/worlds/cone.world"/>
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="gui" value="true"/>
+      <arg name="headless" value="false"/>
+      <arg name="debug" value="false"/>
+    </include>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <!-- <rosparam file="$(find mybot)/config/diff_drive.yaml"/> -->
+    <!-- <node name="Controller_Spawner" pkg="controller_manager" type="spawner" args ="diff_drive_controller"/> -->
+
+</launch>
